@@ -1,7 +1,7 @@
 language: node_js
 os: osx
 node_js:
-  - stable
+  - 10
 before_script:
   - npm install
 cache:
