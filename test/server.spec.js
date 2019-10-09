@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const server = require('../server');
+const server = require('../src/App');
 
 describe('test', () => {
   it('should return a string', () => {

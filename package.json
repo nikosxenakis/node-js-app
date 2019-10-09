@@ -2,18 +2,29 @@
   "name": "node-js-app",
   "version": "1.0.0",
   "description": "node-js-app",
-  "main": "server.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/nikosxenakis/node-js-app",
   "scripts": {
-    "start": "node server.js",
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node .",
     "test": "mocha --exit"
   },
   "author": "Nikos Xenakis",
   "license": "ISC",
   "dependencies": {
+    "@types/sqlite3": "^3.1.5",
     "chai": "^4.2.0",
     "express": "^4.17.1",
     "mocha": "^6.2.1",
-    "sqlite3": "^4.1.0"
+    "sqlite3": "^4.1.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.12",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
   }
 }
