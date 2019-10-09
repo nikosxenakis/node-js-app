@@ -6,7 +6,7 @@
   "repository": "https://github.com/nikosxenakis/node-js-app",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha"
+    "test": "mocha --exit"
   },
   "author": "Nikos Xenakis",
   "license": "ISC",
