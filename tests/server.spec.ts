@@ -1,5 +1,6 @@
-const expect = require('chai').expect
-const server = require('../src/App');
+import { expect } from 'chai';
+import 'mocha';
+import app from "../src/App";
 
 describe('test', () => {
   it('should return a string', () => {
