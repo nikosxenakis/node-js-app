@@ -21,16 +21,18 @@ class App {
     const router = express.Router();
     router.get("/", (req, res) => {
       logger.info(`get`);
-      this.access_db();
+      const dbRes = this.access_db();
 
       res.json({
-        message: "Hello World!"
+        message: "Hello World!",
+        message2: dbRes
       });
     });
+
     this.express.use("/", router);
   }
 
-  private access_db(): void {
+  private access_db(): string {
 
     const db = new sqlite3.Database("./resources/database.db");
     let res = null;

@@ -21,9 +21,10 @@ class App {
         const router = express_1.default.Router();
         router.get("/", (req, res) => {
             logger.info(`get`);
-            this.access_db();
+            const dbRes = this.access_db();
             res.json({
-                message: "Hello World!"
+                message: "Hello World!",
+                message2: dbRes
             });
         });
         this.express.use("/", router);

@@ -12,7 +12,7 @@ const logger = winston.createLogger({
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
 //   if (err) {
     // return console.log(err);
 //   }

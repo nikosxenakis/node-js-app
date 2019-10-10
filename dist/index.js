@@ -13,7 +13,7 @@ const logger = winston_1.default.createLogger({
 });
 // export default logger;
 const port = process.env.PORT || 3000;
-App_1.default.listen(port, () => {
+const server = App_1.default.listen(port, () => {
     //   if (err) {
     // return console.log(err);
     //   }
