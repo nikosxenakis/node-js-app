@@ -1,13 +1,7 @@
 import express from "express";
-import sqlite3 from "sqlite3";
-import winston from "winston";
-
-const logger = winston.createLogger({
-  transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: "combined.log" })
-  ]
-});
+import { accessDB } from "./routes/AccessDB";
+import { initRoute } from "./routes/InitRoute";
+import { lightRoute } from "./routes/LightRoute";
 
 class App {
   public express: express.Application;
@@ -19,39 +13,18 @@ class App {
 
   private mountRoutes(): void {
     const router = express.Router();
-    router.get("/", (req, res) => {
-      logger.info(`get`);
-      const dbRes = this.access_db();
 
-      res.json({
-        message: "Hello World!",
-        message2: dbRes
-      });
-    });
+    router.get("/access_db", accessDB);
+    this.express.use("/access_db", router);
 
+    router.get("/", initRoute);
     this.express.use("/", router);
+
+    router.get("/lights", lightRoute);
+    this.express.use("/lights", router);
+
   }
 
-  private access_db(): string {
-
-    const db = new sqlite3.Database("./resources/database.db");
-    let res = null;
-    const sql = "SELECT * FROM sqlite_sequence";
-
-    db.all(sql, [], (err, rows) => {
-      if (err) {
-        throw err;
-      }
-      rows.forEach((row) => {
-        res = row.name + " " + row.seq + "\n";
-        logger.info(res);
-
-      });
-    });
-
-    db.close();
-    return res;
-  }
 }
 export default new App().express;
 

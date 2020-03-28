@@ -4,14 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const sqlite3_1 = __importDefault(require("sqlite3"));
-const winston_1 = __importDefault(require("winston"));
-const logger = winston_1.default.createLogger({
-    transports: [
-        new winston_1.default.transports.Console(),
-        new winston_1.default.transports.File({ filename: "combined.log" })
-    ]
-});
+const AccessDB_1 = require("./routes/AccessDB");
+const InitRoute_1 = require("./routes/InitRoute");
+const LightRoute_1 = require("./routes/LightRoute");
 class App {
     constructor() {
         this.express = express_1.default();
@@ -19,31 +14,12 @@ class App {
     }
     mountRoutes() {
         const router = express_1.default.Router();
-        router.get("/", (req, res) => {
-            logger.info(`get`);
-            const dbRes = this.access_db();
-            res.json({
-                message: "Hello World!",
-                message2: dbRes
-            });
-        });
+        router.get("/access_db", AccessDB_1.accessDB);
+        this.express.use("/access_db", router);
+        router.get("/", InitRoute_1.initRoute);
         this.express.use("/", router);
-    }
-    access_db() {
-        const db = new sqlite3_1.default.Database("./resources/database.db");
-        let res = null;
-        const sql = "SELECT * FROM sqlite_sequence";
-        db.all(sql, [], (err, rows) => {
-            if (err) {
-                throw err;
-            }
-            rows.forEach((row) => {
-                res = row.name + " " + row.seq + "\n";
-                logger.info(res);
-            });
-        });
-        db.close();
-        return res;
+        router.get("/lights", LightRoute_1.lightRoute);
+        this.express.use("/lights", router);
     }
 }
 exports.default = new App().express;
