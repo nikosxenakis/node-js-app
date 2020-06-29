@@ -19,5 +19,6 @@ const server = App_1.default.listen(port, () => {
     //   }
     // logger.info('server is listening on ${port}');
     logger.info(`server is listening on ${port}`);
+    App_1.default.set('view engine', 'pug');
 });
 //# sourceMappingURL=index.js.map

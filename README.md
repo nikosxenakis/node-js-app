@@ -12,4 +12,17 @@ http://localhost:6561/lights?color=white
 Lifx API
 https://api.developer.lifx.com/docs/set-states
 
+
+Examples:
+
+http://192.168.1.100:6561/
+http://192.168.1.100:6561/lights?power=1
+http://192.168.1.100:6561/lights?color=white
+
+Script on startup:
+sudo nano /etc/rc.local
+
+# Open Browser
+DISPLAY=:0 chromium-browser --kiosk http://192.168.1.100:6561/ &
+
 </div>

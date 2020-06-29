@@ -9,6 +9,7 @@ const InitRoute_1 = require("./routes/InitRoute");
 const LightRoute_1 = require("./routes/LightRoute");
 class App {
     constructor() {
+        process.title = "node-js-app";
         this.express = express_1.default();
         this.mountRoutes();
     }

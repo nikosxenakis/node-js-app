@@ -7,6 +7,7 @@ class App {
   public express: express.Application;
 
   constructor() {
+    process.title = "node-js-app";
     this.express = express();
     this.mountRoutes();
   }

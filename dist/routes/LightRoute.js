@@ -5,10 +5,15 @@ const Logger_1 = require("../utils/Logger");
 const lifxAPIService = new LifxAPIService_1.LifxAPIService("c8dbae8dc120496d31bb6851412867c8eb82bdac5e318eb864b8d1eb4c6101d4");
 exports.lightRoute = (req, res) => {
     let color = req.query.color;
+    let power = req.query.power;
     Logger_1.Logger.info("get: /light in color = " + color);
-    if (color == undefined)
-        color = "white";
-    lifxAPIService.setColor(color);
+    Logger_1.Logger.info("get: /light in power = " + power);
+    if (color != undefined) {
+        lifxAPIService.setColor(color);
+    }
+    if (power != undefined) {
+        lifxAPIService.setPower(power);
+    }
     res.json({
         message: "Init page"
     });

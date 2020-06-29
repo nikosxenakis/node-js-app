@@ -17,7 +17,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const rp = __importStar(require("request-promise"));
-const Logger_1 = require("../Utils/Logger");
+// import { Logger } from "../Utils/Logger";
 class LifxAPIService {
     constructor(token) {
         this.lifxURI = "https://api.lifx.com/v1/";
@@ -49,8 +49,8 @@ class LifxAPIService {
     setColor(color) {
         return __awaiter(this, void 0, void 0, function* () {
             let lights = yield this.getAllLightsAPI();
-            Logger_1.Logger.info("getAllLightsAPI");
-            Logger_1.Logger.info(lights);
+            // Logger.info("getAllLightsAPI");
+            // Logger.info(lights);
             const bulbName = lights[0].id;
             const optionState = {
                 power: "on",
@@ -59,7 +59,25 @@ class LifxAPIService {
                 duration: 1,
             };
             const state = yield this.setStateAPI(bulbName, optionState);
-            Logger_1.Logger.info(state);
+            // Logger.info(state);
+        });
+    }
+    setPower(power) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let powerStr = "off";
+            if (power == true)
+                powerStr = "on";
+            let lights = yield this.getAllLightsAPI();
+            // Logger.info("getAllLightsAPI");
+            // Logger.info(lights);
+            const bulbName = lights[0].id;
+            const optionState = {
+                power: powerStr,
+                brightness: 1,
+                duration: 1,
+            };
+            const state = yield this.setStateAPI(bulbName, optionState);
+            // Logger.info(state);
         });
     }
 }

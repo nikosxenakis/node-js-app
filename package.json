@@ -9,6 +9,7 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node .",
+    "stop": "pkill --signal SIGINT node-js-app",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts --exit"
   },
   "author": "Nikos Xenakis",
@@ -16,6 +17,10 @@
   "dependencies": {
     "@types/sqlite3": "^3.1.5",
     "express": "^4.17.1",
+    "express-generator": "^4.16.1",
+    "pug": "^3.0.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
     "sqlite3": "^4.1.0",
     "winston": "^3.2.1"
   },
@@ -24,6 +29,7 @@
     "@types/express": "^4.17.1",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.12",
+    "@types/request-promise": "^4.1.46",
     "chai": "^4.2.0",
     "mocha": "^6.2.1",
     "ts-node": "^8.4.1",

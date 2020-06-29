@@ -18,5 +18,6 @@ const server = app.listen(port, () => {
 //   }
 // logger.info('server is listening on ${port}');
 
-logger.info(`server is listening on ${port}`);
+  logger.info(`server is listening on ${port}`);
+  app.set('view engine', 'pug');
 });

@@ -1,5 +1,6 @@
 import * as rp from "request-promise";
-import { Logger } from "../Utils/Logger";
+import { stringify } from "querystring";
+// import { Logger } from "../Utils/Logger";
 
 export class LifxAPIService {
     private lifxURI = "https://api.lifx.com/v1/";
@@ -34,8 +35,8 @@ export class LifxAPIService {
     public async setColor(color: string) {
 
         let lights = await this.getAllLightsAPI();
-        Logger.info("getAllLightsAPI");
-        Logger.info(lights);
+        // Logger.info("getAllLightsAPI");
+        // Logger.info(lights);
 
         const bulbName = lights[0].id;
         const optionState = {
@@ -45,7 +46,25 @@ export class LifxAPIService {
             duration: 1,
         };
         const state = await this.setStateAPI(bulbName, optionState);
-        Logger.info(state);
+        // Logger.info(state);
     }
 
+    public async setPower(power: boolean) {
+        let powerStr: String = "off";
+        if(power == true)
+            powerStr = "on";
+
+        let lights = await this.getAllLightsAPI();
+        // Logger.info("getAllLightsAPI");
+        // Logger.info(lights);
+
+        const bulbName = lights[0].id;
+        const optionState = {
+            power: powerStr,
+            brightness: 1,
+            duration: 1,
+        };
+        const state = await this.setStateAPI(bulbName, optionState);
+        // Logger.info(state);
+    }
 }

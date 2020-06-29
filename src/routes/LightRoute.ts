@@ -5,13 +5,18 @@ const lifxAPIService = new LifxAPIService("c8dbae8dc120496d31bb6851412867c8eb82b
 
 export const lightRoute = (req: any, res: any)  => {
 
-    let color = req.query.color;
+    let color: string = req.query.color;
+    let power: boolean = req.query.power;
+
     Logger.info("get: /light in color = " + color);
+    Logger.info("get: /light in power = " + power);
 
-    if(color == undefined)
-      color = "white";
-
-    lifxAPIService.setColor(color);
+    if(color != undefined) {
+      lifxAPIService.setColor(color);
+    }
+    if(power != undefined) {
+      lifxAPIService.setPower(power);
+    }
 
     res.json({
       message: "Init page"
